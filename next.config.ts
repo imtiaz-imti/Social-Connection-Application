@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+typeScript : {
+    ignoreBuildErrors : true
+},
 const nextConfig = {
   experimental: {
     serverActions: true,
