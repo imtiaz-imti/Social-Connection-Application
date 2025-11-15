@@ -8,11 +8,11 @@ const threadSchema = new mongoose.Schema({
         ref : 'User',
         required : true 
     },
-    // community : {
-    //     type : mongoose.Schema.Types.ObjectId,
-    //     ref : 'Community',
-    //     required : true
-    // }, 
+    community : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Community',
+        required : true
+    }, 
     createdAt : {
         type : Date,
         default : Date.now
