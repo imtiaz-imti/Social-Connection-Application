@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { threadValidation } from "@/lib/validations/thread"
 import * as z from "zod"
 import { usePathname, useRouter } from "next/navigation" 
+import { useOrganization } from "@clerk/nextjs"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -40,6 +41,7 @@ interface Props {
 function PostThread({ userId } : {userId : string }){
     const pathname = usePathname()
     const router = useRouter()
+    const { organization } = useOrganization()
     const form = useForm<z.infer<typeof threadValidation>>({
     resolver: zodResolver(threadValidation),
     defaultValues: {
@@ -51,7 +53,7 @@ function PostThread({ userId } : {userId : string }){
       await createThread({
         text : values.thread,
         author : userId,
-        communityId : null,
+        communityId : organization ? organization.id : null,
         path : pathname 
       })
       router.push('/')
